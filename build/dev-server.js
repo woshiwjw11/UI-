@@ -14,6 +14,31 @@ var port = process.env.PORT || config.dev.port
 var proxyTable = config.dev.proxyTable
 
 var app = express()
+var appData =require('../data.json');//首先对数据进行引入
+var seller=appData.seller;//定义数据名称
+var goods=appData.goods;
+var ratings=appData.ratings;
+var apiRoutes=express.Router();
+apiRoutes.get('/seller',function(req,res){
+  res.json({
+    errno: 0,
+    data:seller
+  });//获取相应的数据
+
+});
+apiRoutes.get('/goods',function(req,res){
+  res.json({
+    errno:0,
+    data:goods
+  });
+});
+apiRoutes.get('/rating',function(req,res){
+  res.json({
+    errno:0,
+    data:ratings
+  });
+});
+app.use('/api',apiRoutes);//通过访问接口得到数据
 var compiler = webpack(webpackConfig)
 
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
