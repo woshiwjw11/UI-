@@ -1,6 +1,5 @@
 <template>
   <div>
-  	评价
   </div>
 </template>
 <script type="text/ecmascript-6">

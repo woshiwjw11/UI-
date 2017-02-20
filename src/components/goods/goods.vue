@@ -14,7 +14,7 @@
   			<li v-for="item in goods" class="food-list food-list-hook">
   				<h1 class="title">{{item.name}}</h1>
   				<ul>
-  					<li v-for="food in item.foods" class="food-item border-1px">
+  					<li v-for="food in item.foods" class="food-item border-1px"  @click="selectFood(food,$event)">
   						<div class="icon">
   							<img :src="food.icon" width="57" height="57" >
   						</div>
@@ -41,11 +41,13 @@
   	</div>
     <shopcart :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice" :select-foods="selectFoods" v-ref:shopcart></shopcart>
   </div>
+  <food :food="selectedFood" v-ref:food></food>
 </template>
 <script type="text/ecmascript-6">
 import BScroll from 'better-scroll';
 import shopcart from 'components/shopcart/shopcart';
 import cartcontrol from 'components/cartcontrol/cartcontrol';
+import food from 'components/food/food';
   export default{
   	props: {
   		seller: {
@@ -56,7 +58,8 @@ import cartcontrol from 'components/cartcontrol/cartcontrol';
   		return {
   			goods: [],
         listHeight: [],
-        scrollY: 0
+        scrollY: 0,
+        selectedFood: {}
   		};
   	},
     computed: {
@@ -131,13 +134,22 @@ import cartcontrol from 'components/cartcontrol/cartcontrol';
           this.listHeight.push(height);
         }
       },
+      selectFood(food, event) {
+        if (!event._constructed) {
+          return;
+        }
+        this.selectedFood= food;
+        console.log(this.food);
+        this.$refs.food.show();
+      },
       _drop(target) {
         this.$refs.shopcart.drop(target); // 传递dom结构
       }
     },
     components: {
       shopcart,
-      cartcontrol
+      cartcontrol,
+      food
     },
     events: {
       'cart.add'(target) {
