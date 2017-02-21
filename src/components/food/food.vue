@@ -123,6 +123,7 @@ import ratingselect from 'components/ratingselect/ratingselect';
         });
       }
     },
+
   	 components: {
       cartcontrol,
       split,
@@ -230,5 +231,28 @@ import ratingselect from 'components/ratingselect/ratingselect';
 				margin-left:18px
 				font-size:14px
 				color:rgb(7,17,27)
-			
+			.rating-wrapper
+				padding: 0 18px
+				.rating-item
+					position:relative
+					padding: 16px 0
+					.user
+						position:absolute
+						right: 0
+						top:16px
+						line-height:12px
+						font-size:0
+						.name
+							display:inline-block
+							margin-right:6px
+							vertical-align: top
+							font-size:10px
+							color:rgb(147, 153, 159)
+						.avatar
+							border-radius:50%
+					.text
+						line-height:16px
+						font-size:12px
+						color:rgb(7,27,27)
+						
 </style>
